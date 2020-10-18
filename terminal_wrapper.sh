@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/terminal-wrapper
-# date:       2020-09-12T14:07:42+0200
+# date:       2020-10-18T11:32:35+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -18,8 +18,7 @@ help="$script [-h/--help] -- script to execute command in new terminal window
   Examples:
     $script git status"
 
-status="The command exited with ${yellow}status $?${reset}.
-"
+status="The command exited with ${yellow}status $?${reset}."
 keys="Press [${blue}q${reset}]${blue}uit${reset} \
 to exit this window or [${blue}s${reset}]${blue}hell${reset} to run $SHELL..."
 
@@ -48,7 +47,7 @@ else
     "$@"
     key=""
     while true; do
-        printf "\n\r%s%s" "${status}" "${keys}" && read_c "key"
+        printf "\n\r%s\n%s" "$status" "$keys" && read_c "key"
         case "$key" in
             q|Q)
                 exit 0

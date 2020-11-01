@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/terminal-wrapper
-# date:       2020-10-19T19:33:43+0200
+# date:       2020-11-01T11:23:21+0100
 
 # color variables
 yellow=$(tput setaf 3)
@@ -48,8 +48,9 @@ if [ "$1" = "-h" ] \
 else
     "$@"
     key=""
+    printf "\n%s\n" "$status"
     while true; do
-        printf "\n\r%s\n%s" "$status" "$keys" && read_c "key"
+        printf "\r%s" "$keys" && read_c "key"
         case "$key" in
             q|Q)
                 exit 0

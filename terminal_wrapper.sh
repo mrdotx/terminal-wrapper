@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
+# path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh_
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/terminal-wrapper
-# date:   2021-01-15T14:05:50+0100
+# date:   2022-05-10T14:50:37+0200
 
 # color variables
 yellow=$(tput setaf 3)
@@ -40,28 +40,29 @@ read_c() {
         && stty "$save_tty_set"
 }
 
-if [ "$1" = "-h" ] \
-    || [ "$1" = "--help" ] \
-    || [ $# -eq 0 ]; then
+case "$1" in
+    -h | --help | "")
         printf "%s\n" "$help"
         exit 1
-else
-    "$@"
-    key=""
-    printf "\n%s\n" "$status"
-    while true; do
-        printf "\r%s" "$keys" && read_c "key"
-        case "$key" in
-            q|Q)
-                exit 0
-                ;;
-            s|S)
-                $SHELL \
-                && exit 0
-                ;;
-            *)
-                status=""
-                ;;
-        esac
-    done
-fi
+        ;;
+    *)
+        "$@"
+        key=""
+        printf "\n%s\n" "$status"
+        while true; do
+            printf "\r%s" "$keys" && read_c "key"
+            case "$key" in
+                q|Q)
+                    exit 0
+                    ;;
+                s|S)
+                    $SHELL \
+                    && exit 0
+                    ;;
+                *)
+                    status=""
+                    ;;
+            esac
+        done
+        ;;
+esac

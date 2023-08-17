@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh_
+# path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/terminal-wrapper
-# date:   2022-05-10T14:50:37+0200
+# date:   2023-08-17T12:33:30+0200
 
 # color variables
 yellow=$(tput setaf 3)

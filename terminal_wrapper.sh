@@ -3,12 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/terminal-wrapper
-# date:   2023-08-17T12:33:30+0200
+# date:   2024-04-25T11:05:19+0200
 
 # color variables
-yellow=$(tput setaf 3)
-blue=$(tput setaf 12)
-reset=$(tput sgr0)
+red="\033[31m"
+green="\033[32m"
+blue="\033[94m"
+reset="\033[0m"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to execute command in new terminal window
@@ -17,10 +18,6 @@ help="$script [-h/--help] -- script to execute command in new terminal window
 
   Examples:
     $script git status"
-
-status="The command exited with ${yellow}status $?${reset}."
-keys="Press [${blue}q${reset}]${blue}uit${reset} \
-to exit this window or [${blue}s${reset}]${blue}hell${reset} to run $SHELL..."
 
 read_c() {
     [ -t 0 ] \
@@ -47,10 +44,21 @@ case "$1" in
         ;;
     *)
         "$@"
+        error=$?
+        [ $error -eq 0 ] \
+            && status="${green}status $error$reset" \
+            || status="${red}status $error$reset"
+        cmd_status="The command exited with $status."
         key=""
-        printf "\n%s\n" "$status"
+        printf "\n%b\n" "$cmd_status"
         while true; do
-            printf "\r%s" "$keys" && read_c "key"
+            printf "\r%s %b %s %b %s" \
+                "Press" \
+                "[${blue}q${reset}]${blue}uit${reset}" \
+                "to exit this window or" \
+                "[${blue}s${reset}]${blue}hell${reset}" \
+                "to run $SHELL..." \
+                && read_c "key"
             case "$key" in
                 q|Q)
                     exit 0
@@ -60,7 +68,7 @@ case "$1" in
                     && exit 0
                     ;;
                 *)
-                    status=""
+                    cmd_status=""
                     ;;
             esac
         done

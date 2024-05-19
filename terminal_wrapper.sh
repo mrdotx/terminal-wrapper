@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/terminal-wrapper
-# date:   2024-04-25T11:05:19+0200
+# date:   2024-05-19T10:02:54+0200
 
 # color variables
 red="\033[31m"
@@ -44,19 +44,19 @@ case "$1" in
         ;;
     *)
         "$@"
-        error=$?
-        [ $error -eq 0 ] \
-            && status="${green}status $error$reset" \
-            || status="${red}status $error$reset"
-        cmd_status="The command exited with $status."
+        status=$?
+        [ $status -eq 0 ] \
+            && color="$green" \
+            || color="$red"
+        status_msg="The command exited with status [$color$status$reset]."
         key=""
-        printf "\n%b\n" "$cmd_status"
+        printf "\n%b\n" "$status_msg"
         while true; do
             printf "\r%s %b %s %b %s" \
                 "Press" \
-                "[${blue}q${reset}]${blue}uit${reset}" \
+                "[${blue}q$reset]${blue}uit$reset" \
                 "to exit this window or" \
-                "[${blue}s${reset}]${blue}hell${reset}" \
+                "[${blue}s$reset]${blue}hell$reset" \
                 "to run $SHELL..." \
                 && read_c "key"
             case "$key" in
@@ -68,7 +68,7 @@ case "$1" in
                     && exit 0
                     ;;
                 *)
-                    cmd_status=""
+                    status_msg=""
                     ;;
             esac
         done

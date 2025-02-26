@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/terminal-wrapper
-# date:   2024-05-19T10:02:54+0200
+# date:   2025-02-26T06:22:42+0100
 
 # color variables
+reset="\033[0m"
 red="\033[31m"
 green="\033[32m"
 blue="\033[94m"
-reset="\033[0m"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to execute command in new terminal window

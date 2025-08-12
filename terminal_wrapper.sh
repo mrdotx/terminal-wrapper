@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/terminal-wrapper/terminal_wrapper.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/terminal-wrapper
-# date:   2025-02-26T06:22:42+0100
+# url:    https://github.com/mrdotx/terminal-wrapper
+# date:   2025-08-12T04:18:09+0200
 
 # color variables
 reset="\033[0m"
